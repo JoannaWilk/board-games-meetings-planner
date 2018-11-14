@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br />
+<h3>Add New Game</h3>
+
+{% if error %}
+    {{ error }}
+{% endif %}
+
+<form method="POST" action="{% url 'games:add' %}">
+    {% csrf_token %}
+    Name:
+    <input type="text" name="name" />
+    <br />
+    Minimum number of players:
+    <input type="number" name="min_players" />
+    <br />
+    Maximum number of players:
+    <input type="number" name="max_players" />
+    <br />
+    <input class="btn btn-success" type="submit" value="Save">
+</form>
+
+{% endblock %}

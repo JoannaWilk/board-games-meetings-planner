@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 
 from users.models import CustomUser
 
@@ -11,7 +10,9 @@ class Game(models.Model):
     mod_date = models.DateTimeField(auto_now=True)
     min_players = models.IntegerField(default=1)
     max_players = models.IntegerField(default=99)
-    owners = models.ManyToManyField(CustomUser)
+    added_by = models.ForeignKey(CustomUser, on_delete=models.SET('deleted'),
+                                 null=True)
+    owners = models.ManyToManyField(CustomUser, related_name='owned_games')
 
     def __str__(self):
         return self.name
