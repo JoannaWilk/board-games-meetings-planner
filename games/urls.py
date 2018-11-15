@@ -6,5 +6,5 @@ app_name = 'games'
 urlpatterns = [
     path('', views.IndexView.as_view(), name='home'),
     path('add/', views.add_game, name='add'),
-    path('<int:pk>/', views.DetailView.as_view(), name='detail')
+    path('<int:pk>/', views.GameView.as_view(), name='detail')
 ]
