@@ -3,30 +3,18 @@
 {% block title %}Latest Games News{%  endblock %}
 
 {% block content %}
-
-{% if user.is_authenticated %}
-    Hello {{ user.username }}!
-
-{% if latest_games_news %}
-    <ul>
-        {% for game in latest_games_news %}
-            <li>
-                <a href="{% url 'games:detail' game.id %}">
-                    {{ game.name }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No games news.</p>
-{% endif %}
-
-
-<a class="btn btn-secondary" href="{% url 'games:add' %}">Add Game</a>
-
-
-{% else %}
-    <p>You are not logged in.</p>
-{% endif %}
-
+    {% if latest_games_news %}
+        <ul>
+            {% for game in latest_games_news %}
+                <li>
+                    <a href="{% url 'games:detail' game.id %}">
+                        {{ game.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No games news.</p>
+    {% endif %}
+    <a class="btn btn-secondary" href="{% url 'games:add' %}">Add Game</a>
 {% endblock %}
