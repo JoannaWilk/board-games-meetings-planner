@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <br />
     Hello {{ user.username }}!
 {% endblock %}
 
 {% block notloggedcontent %}
+    <br />
     <p>You are not logged in.</p>
 {% endblock %}
