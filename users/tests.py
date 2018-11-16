@@ -19,4 +19,4 @@ class UserModelTests(TestCase):
             username='testuser', email='test@user.com', password='123ABC'
         )
         self.assertTrue(isinstance(user, CustomUser))
-        self.assertEqual(user.__str__(), user.email)
+        self.assertEqual(user.__str__(), user.username)
