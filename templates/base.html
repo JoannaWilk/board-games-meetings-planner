@@ -46,11 +46,31 @@
             </div>
         </div>
     </nav>
-
-    <div>
-        {% block content %}
-        {% endblock %}
+    {% if user.is_authenticated %}
+    <div class="container" id="welcome">
+      {% block welcome %}
+      {% endblock %}
     </div>
+    <div class="container" id="title">
+      {% block title %}
+      {% endblock %}
+    </div>
+    <div class="container" id="content">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <div class="container" id="sidebar">
+      {% block sidebar %}
+      {% endblock %}
+    </div>
+    {% else %}
+        <div class="container" id="notloggedcontent">
+            {% block notloggedcontent %}
+            <br />
+            <p>You are not logged in.
+            {% endblock %}
+        </div>
+    {% endif %}
 
 </body>
 

@@ -23,7 +23,6 @@ class GameView(DetailView):
 @login_required(login_url='users/login/')
 def add_game(request):
     if request.method == 'POST':
-        # name, min_players, max_players
         if request.POST['name']:
             game = Game()
             game.name = request.POST['name']
@@ -32,6 +31,8 @@ def add_game(request):
                 game.min_players = request.POST['min_players']
             if request.POST['max_players']:
                 game.max_players = request.POST['max_players']
+            if request.POST['description']:
+                game.description = request.POST['description']
             game.save()
             return redirect('games:home')
         else:
