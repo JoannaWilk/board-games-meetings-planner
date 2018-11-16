@@ -31,6 +31,8 @@ def add_game(request):
                 game.min_players = request.POST['min_players']
             if request.POST['max_players']:
                 game.max_players = request.POST['max_players']
+            if request.POST['description']:
+                game.description = request.POST['description']
             game.save()
             return redirect('games:home')
         else:
