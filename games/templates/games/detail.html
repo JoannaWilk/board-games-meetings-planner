@@ -4,5 +4,12 @@
 
 <br />
 <h1>{{ game.name }}</h1>
-
+<p>Added by {{ game.added_by }} on {{ game.pub_date }}</p>
+<br />
+<p>Number of players: {{ game.min_players }} - {{ game.max_players }}</p>
+<br />
+<br />
+{% if game.description %}<p>{{ game.description }}</p>
+{% else %}<p>Be the first to add description to this game!</p>
+{% endif %}
 {% endblock %}
