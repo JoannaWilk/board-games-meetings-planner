@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView, ListView
 
-from .models import Game
+from .models import Contribution, Game
 from users.models import CustomUser
 
 
@@ -26,7 +26,6 @@ def add_game(request):
         if request.POST['name']:
             game = Game()
             game.name = request.POST['name']
-            game.added_by = request.user
             if request.POST['min_players']:
                 game.min_players = request.POST['min_players']
             if request.POST['max_players']:
@@ -34,6 +33,11 @@ def add_game(request):
             if request.POST['description']:
                 game.description = request.POST['description']
             game.save()
+            contribution = Contribution(
+                game=game, user=request.user,
+                type='added', mod_date=game.pub_date
+            )
+            contribution.save()
             return redirect('games:home')
         else:
             return render(

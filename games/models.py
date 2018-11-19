@@ -13,22 +13,26 @@ class Game(models.Model):
 
     name = models.CharField(max_length=300, unique=True)
     pub_date = models.DateTimeField(auto_now_add=True)
-    mod_date = models.DateTimeField(auto_now=True)
     min_players = models.IntegerField()
     max_players = models.IntegerField()
-    game_type = models.CharField(max_length=1, choices=GAME_TYPES)
+    type = models.CharField(max_length=1, choices=GAME_TYPES)
     description = models.TextField(null=True)
 
-    # todo remove null=True from added_by and last_modified_by
-    added_by = models.ForeignKey(
-        CustomUser, on_delete=models.SET('deleted'),
-        related_name='added_games')
-    last_modified_by = models.ForeignKey(
-        CustomUser, on_delete=models.SET('deleted'),
-        related_name='modified_games')
+    added_by = models.ForeignKey(CustomUser, on_delete=models.SET('deleted'))
+
     contributors = models.ManyToManyField(
-        CustomUser, related_name='contributed_to')
+        CustomUser, related_name='contributed_to',
+        through='Contribution'
+    )
     owners = models.ManyToManyField(CustomUser, related_name='owned_games')
 
     def __str__(self):
         return self.name
+
+
+class Contribution(models.Model):
+
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET('deleted'))
+    type = models.CharField(max_length=10)
+    mod_date = models.DateTimeField(auto_now_add=True)
