@@ -30,6 +30,7 @@ def add_game(request):
             game.name = form.cleaned_data['name']
             game.min_players = form.cleaned_data['min_players']
             game.max_players = form.cleaned_data['max_players']
+            game.description = form.cleaned_data['description']
             game.added_by = request.user
             game.save()
             contribution = Contribution(
