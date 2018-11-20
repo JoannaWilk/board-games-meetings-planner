@@ -11,7 +11,7 @@
 
 <form method="POST" action="{% url 'games:add' %}">
     {% csrf_token %}
-    Name:
+    <!-- Name:
     <input type="text" name="name" required/>
     <br />
     Minimum number of players:
@@ -23,7 +23,8 @@
     Description:
     <br />
     <textarea rows="15" cols="100" name="description"></textarea>
-    <br />
+    <br /> -->
+    {{ form.as_p }}
     <input class="btn btn-success" type="submit" value="Save">
 </form>
 
