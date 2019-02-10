@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}<br/>Latest Games News{%  endblock %}
+
+{% block content %}
+    <br />
+    {% if latest_games_news %}
+        <ul>
+            {% for game in latest_games_news %}
+                <li>
+                    <a href="{% url 'games:detail' game.id %}">
+                        {{ game.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No games news.</p>
+    {% endif %}
+    <br />
+    <a class="btn btn-secondary" href="{% url 'games:add' %}">Add Game</a>
+{% endblock %}
